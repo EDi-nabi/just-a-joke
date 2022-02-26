@@ -4,7 +4,7 @@ import { Observable, from } from 'rxjs';
 import { filter, mergeMap, count, map } from 'rxjs/operators';
 
 import { AppConfigService } from './app-config.service';
-import { StorageConfig } from '../interfaces/storage-config.interface';
+import { StorageConfig } from 'src/app/interfaces/storage-config.interface';
 
 @Injectable({
   providedIn: 'root'
