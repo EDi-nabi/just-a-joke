@@ -9,7 +9,7 @@ import { JokeInterceptor } from './interceptors/joke.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

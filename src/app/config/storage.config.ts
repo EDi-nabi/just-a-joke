@@ -9,6 +9,6 @@ export const storageConfig = {
   // prefixes to simulate multiple databases
   prefixes: {
     main: 'main_',
-    jokes: 'jokes_',
+    ui: 'ui_',
   },
 };
