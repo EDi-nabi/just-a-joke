@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 
 import { reducers } from './store/reducers/core.reducers';
 import { ApiService } from './services/api.service';
-import { AppConfigService } from './services/app-config.service';
+import { ConfigService } from './services/config.service';
 import { StorageService } from './services/storage.service';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { StorageService } from './services/storage.service';
   ],
   providers: [
     ApiService,
-    AppConfigService,
+    ConfigService,
     StorageService,
   ]
 

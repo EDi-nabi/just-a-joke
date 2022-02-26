@@ -12,7 +12,7 @@ import { storageConfig } from 'src/app/config/storage.config';
 @Injectable({
   providedIn: 'root'
 })
-export class AppConfigService {
+export class ConfigService {
 
   private config: Configs;
 
@@ -24,8 +24,15 @@ export class AppConfigService {
     };
   }
 
-  get(key: string): any {
-    return this.config.app[key] ?? false;
+  get(config: string, key: string): any {
+    switch (config) {
+      case 'api':
+        return this.config.api[key as keyof ApiConfig] || false;
+      case 'app':
+        return this.config.app[key as keyof AppConfig] || false;
+      case 'storage':
+        return this.config.storage[key as keyof StorageConfig] || false;
+    }
   }
 
   getAppConfig(): AppConfig {

@@ -1,4 +1,5 @@
 export interface AppConfig {
   itemsPerPage: number;
-  [key: string]: any;
+  imageWidth: number;
+  imageHeight: number;
 }

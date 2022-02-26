@@ -3,7 +3,7 @@ import { StorageMap, JSONSchema } from '@ngx-pwa/local-storage';
 import { Observable, from } from 'rxjs';
 import { filter, mergeMap, count, map } from 'rxjs/operators';
 
-import { AppConfigService } from './app-config.service';
+import { ConfigService } from './config.service';
 import { StorageConfig } from 'src/app/interfaces/storage-config.interface';
 
 @Injectable({
@@ -16,9 +16,9 @@ export class StorageService {
 
   constructor(
     private storage: StorageMap,
-    private appConfigService: AppConfigService,
+    private configService: ConfigService,
   ) {
-    this.storageConfig = this.appConfigService.getStorageConfig();
+    this.storageConfig = this.configService.getStorageConfig();
   }
 
   // read

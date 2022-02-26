@@ -3,10 +3,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { AppConfigService } from './app-config.service';
+import { ConfigService } from './config.service';
 import { ApiConfig } from 'src/app/interfaces/api-config.interface';
 import { Joke } from 'src/app/interfaces/joke.interface';
-import { JokesResponse } from 'src/app/interfaces/jokes-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +18,10 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private appConfigService: AppConfigService,
+    private configService: ConfigService,
   ) {
-    this.apiConfig = this.appConfigService.getApiConfig();
-    this.amount = this.appConfigService.get('itemsPerPage') || 10;
+    this.apiConfig = this.configService.getApiConfig();
+    this.amount = this.configService.get('app', 'itemsPerPage') || 10;
   }
 
   // requests
@@ -34,12 +33,27 @@ export class ApiService {
     );
   }
 
+  // public url strings
+  public getImage(seed: string, type: string = ''): string {
+    return this.getImageUrl(seed, type);
+  }
+
   // urls
   private getJokesUrl(categories: string[], flags: string[], amount: number): string {
     let url = this.apiConfig.jokesUrl;
     url = url.replace('{categories}', categories.join(','));
     url = url.replace('{flags}', flags.join(','));
     url = url.replace('{amount}', amount.toString());
+    return url;
+  }
+
+  private getImageUrl(seed: string, type: string): string {
+    let url = this.apiConfig.imageUrl;
+    url = url.replace('{seed}', seed);
+    url = url.replace('{width}', this.configService.get('app', 'imageWidth'));
+    url = url.replace('{height}', this.configService.get('app', 'imageHeight'));
+    if (type === 'blurred') url += '?blurred';
+    if (type === 'grayscale') url += '?grayscale';
     return url;
   }
 
