@@ -30,7 +30,7 @@ ul {
   display: inline-block;
   color: var(--white);
   margin-left: 10px;
-  padding: 20px;
+  padding: 20px 2rem;
 }
 
 /* Nav menu */
@@ -45,13 +45,15 @@ ul {
 }
 
 .menu {
-  padding: 20px 10px 10px 10px;
+  padding: 20px 2rem 10px 2rem;
 }
 
 .menu a {
   display: block;
   padding: 10px 30px;
   color: var(--black);
+  font-size: 1.3rem;
+  font-family: var(--sans);
   &:hover {
     color: var(--gray);
     text-decoration: underline;

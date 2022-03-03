@@ -15,7 +15,7 @@ export class FilterComponent {
     { name: 'Dark', state: false },
     { name: 'Pun', state: false },
     { name: 'Spooky', state: false },
-    { name: 'Christma', state: false },
+    { name: 'Christmas', state: false },
   ]
 
   constructor(
