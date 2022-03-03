@@ -1,0 +1,49 @@
+.joke {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background: var(--lightgray);
+  margin: 1rem 2rem;
+  padding: 3rem;
+  border-left: 5px var(--highlight) solid;
+
+  .header {
+    margin-right: 2rem;
+
+    .id {
+      position: relative;
+      top: -4px;
+      left: -4px;
+      padding: 5px;
+      background: #000;
+      color: var(--white);
+      margin-right: -100%;
+      float: left;
+      z-index: 100;
+    }
+
+    img {
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .content {
+
+    .footer {
+      color: var(--textlight);
+
+      span {
+        margin-right: 2rem;
+        text-transform: capitalize;
+
+        span {
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}

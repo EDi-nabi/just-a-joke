@@ -1,10 +1,15 @@
-import { ActionReducerMap } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 
-import { JokesReducer } from './jokes.reducers';
+import { hydrationMetaReducer } from "./hydration.reducers";
+import { jokesReducer } from './jokes.reducers';
 import { CoreState } from 'src/app/interfaces/core-state.interface';
-import { UiReducer } from './ui.reducers';
+import { uiReducer } from './ui.reducers';
 
+// reducers
 export const reducers: ActionReducerMap<CoreState, any> = {
-  jokes: JokesReducer,
-  ui: UiReducer,
+  jokes: jokesReducer,
+  ui: uiReducer,
 };
+
+// meta reducers
+export const metaReducers: MetaReducer[] = [hydrationMetaReducer];

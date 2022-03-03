@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 import { reducers } from './store/reducers/core.reducers';
+import { UiEffects } from './store/effects/ui.effects';
+import { JokesEffects } from './store/effects/jokes.effects';
+import { HydrationEffects } from './store/effects/hydration.effects';
 import { ApiService } from './services/api.service';
 import { ConfigService } from './services/config.service';
 import { StorageService } from './services/storage.service';
@@ -14,12 +16,9 @@ import { StorageService } from './services/storage.service';
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({}),
+    HttpClientModule,
     StoreModule.forFeature('core', reducers),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
+    EffectsModule.forFeature([JokesEffects, UiEffects, HydrationEffects]),
   ],
   exports: [
 

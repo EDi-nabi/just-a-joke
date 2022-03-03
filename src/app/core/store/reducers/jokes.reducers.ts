@@ -4,37 +4,43 @@ import { jokesInitialState } from '../state/jokes.state'
 import * as JokesActions from '../actions/jokes.actions';
 
 
-export const JokesReducer = (state = jokesInitialState, action: JokesActions.JokesActions): JokesState => {
+export const jokesReducer = (state = jokesInitialState, action): JokesState => {
   let jokes: Joke[] = [];
   switch (action.type) {
 
-    case JokesActions.ADD_JOKE:
+    case JokesActions.addJoke.type:
       jokes = [...state.jokes];
-      if (!jokes.find(joke => joke.id === action.payload.joke.id)) {
-        jokes.push(action.payload.joke);
+      if (!jokes.find(joke => joke.id === action.joke.id)) {
+        jokes.push(action.joke);
         return { ...state, jokes };
       }
       return state;
 
-    case JokesActions.ADD_JOKES:
-      if (action.payload.jokes.length) {
-        jokes = [...state.jokes].filter(joke => {
-          let result = false;
-          action.payload.jokes.forEach(newJoke => {
-            if (joke.id === newJoke.id) result = true;
-          });
-          return result;
-        });
-        return { ...state, jokes: [...jokes, ...action.payload.jokes] };
+    case JokesActions.addJokes.type:
+      if (action.jokes?.length) {
+        jokes = [...action.jokes];
+        jokes.sort((a, b) => (a.id > b.id) ? 1 : -1);
+        if (action.order === 'desc') {
+          jokes.reverse();
+        }
+        return { ...state, jokes };
       }
       return state;
 
-    case JokesActions.UPDATE_JOKE:
-      jokes = [...state.jokes].filter(joke => joke.id !== action.payload.joke.id);
-      return { ...state, jokes: [...jokes, action.payload.joke] };
+    case JokesActions.sortJokes.type:
+      jokes = [...state.jokes];
+      jokes.sort((a, b) => (a.id > b.id) ? 1 : -1);
+      if (action.order === 'desc') {
+        jokes.reverse();
+      }
+      return { ...state, jokes };
 
-    case JokesActions.REMOVE_JOKE:
-      jokes = [...state.jokes].filter(joke => joke.id !== action.payload.jokeId);
+    case JokesActions.updateJoke.type:
+      jokes = [...state.jokes].filter(joke => joke.id !== action.joke.id);
+      return { ...state, jokes: [...jokes, action.joke] };
+
+    case JokesActions.removeJoke.type:
+      jokes = [...state.jokes].filter(joke => joke.id !== action.jokeId);
       return {
         ...state,
         jokes,
@@ -42,6 +48,6 @@ export const JokesReducer = (state = jokesInitialState, action: JokesActions.Jok
 
     default:
       return state;
-
   }
+
 }

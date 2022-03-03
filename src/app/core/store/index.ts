@@ -13,3 +13,6 @@ export const getJokes = createSelector( getJokesState, jokesSelectors.getJokes )
 export const getUiState = createSelector(coreSelectors.selectCoreState, (state: CoreState) => state.ui);
 export const getUi = createSelector( getUiState, uiSelectors.getUi );
 export const getItemsPerPage = createSelector( getUiState, uiSelectors.getItemsPerPage );
+export const getCategories = createSelector( getUiState, uiSelectors.getCategories );
+export const getOrder = createSelector( getUiState, uiSelectors.getOrder );
+

@@ -1,0 +1,3 @@
+<div class="jokes-list" *ngIf="getItemsPerPage() | async">
+  <app-joke *ngFor="let joke of jokes$ | async" [joke]="joke"></app-joke>
+</div>

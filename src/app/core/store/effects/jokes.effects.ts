@@ -1,36 +1,40 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import * as JokesActions from '../actions/jokes.actions';
-import { Joke } from 'src/app/interfaces/joke.interface';
+import * as selectors from '../';
+import { CoreState } from 'src/app/interfaces/core-state.interface';
 import { ApiService } from '../../services/api.service';
+
 
 @Injectable()
 export class JokesEffects {
 
   apiGetJokes = createEffect(() => this.actions$.pipe(
-    ofType(JokesActions.API_GET_JOKES),
-    switchMap((action: JokesActions.ApiGetJokes) => {
-      return this.apiService.getJokes(action.payload.categories, action.payload.flags, action.payload.amount);
+    ofType(JokesActions.apiGetJokes.type),
+    map((action) => action),
+    switchMap(() => this.store.select(selectors.getUi)),
+    switchMap(ui => {
+      return this.apiService.getJokes(ui.categories, ui.itemsPerPage);
     }),
-    map((jokes: Joke[]) => {
+    withLatestFrom(this.store.select(selectors.getUi)),
+    map(([jokes, ui]) => {
       jokes = jokes.map(joke => {
-        if (joke.flags.racist) {
-          joke.image = this.apiService.getImage('joke_' + joke.id, 'blur');
-        } else if (joke.category === 'dark') {
-          joke.image = this.apiService.getImage('joke_' + joke.id, 'grayscale');
-        } else {
-          joke.image = this.apiService.getImage('joke_' + joke.id);
-        }
+        const filters: string[] = [];
+        if (joke.category.trim().toLowerCase() === 'dark') { filters.push('grayscale') }
+        if (joke.flags.racist === true) { filters.push('blur') }
+        joke.image = this.apiService.getImage('joke_' + joke.id, filters.join('&'));
         return joke;
       });
-      return { type: JokesActions.ADD_JOKES, payload: jokes };
+      return JokesActions.addJokes({ jokes, order: ui.order });
     }),
   ));
 
   constructor(
     private actions$: Actions,
     private apiService: ApiService,
+    private store: Store<CoreState>,
   ) {}
 }

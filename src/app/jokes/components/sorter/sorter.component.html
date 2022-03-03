@@ -1,0 +1,2 @@
+<button *ngIf="(order$ | async) === 'desc'" (click)="setOrder('asc')">↑</button>
+<button *ngIf="(order$ | async) === 'asc'" (click)="setOrder('desc')">↓</button>

@@ -1,0 +1,29 @@
+<div class="joke">
+  <div class="header">
+    <span class="id">{{ joke.id }}</span>
+    <img [src]="joke.image" />
+  </div>
+
+  <div class="content">
+    <div>
+      <p *ngIf="joke.joke">{{ joke.joke }}</p>
+      <p *ngIf="joke.setup">{{ joke.setup }}</p>
+      <p *ngIf="joke.delivery">{{ joke.delivery }}</p>
+    </div>
+    <div class="footer">
+      <span class="category">{{ joke.category }}</span>
+      <span class="type">{{ joke.type }}</span>
+      <span class="flags">
+        <span *ngIf="joke.flags.nsfw">nsfw</span>
+        <span *ngIf="joke.flags.religious">religious</span>
+        <span *ngIf="joke.flags.racist">racist</span>
+        <span *ngIf="joke.flags.sexist">sexist</span>
+        <span *ngIf="joke.flags.political">political</span>
+        <span *ngIf="joke.flags.explicit">explicit</span>
+      </span>
+    </div>
+  </div>
+
+
+</div>
+

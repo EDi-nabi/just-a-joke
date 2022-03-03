@@ -1,41 +1,36 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Joke } from 'src/app/interfaces/joke.interface';
 
-export const ADD_JOKE = '[Jokes] Add single joke';
-export const ADD_JOKES = '[Jokes] Add multiple jokes';
-export const UPDATE_JOKE = '[Jokes] Update single joke';
-export const REMOVE_JOKE = '[Jokes] Remove single joke';
-export const API_GET_JOKES = '[Jokes API] Get jokes from server';
-export const API_ADD_JOKE = '[Jokes API] Save joke to server';
+export const addJoke = createAction(
+  '[Jokes] Add single joke',
+  props<{ joke: Joke }>(),
+);
 
-export class AddJoke implements Action {
-  readonly type: typeof ADD_JOKE = ADD_JOKE;
-  constructor(public payload: { joke: Joke }) { }
-}
+export const addJokes = createAction(
+  '[Jokes] Add multiple jokes',
+  props<{ jokes: Joke[], order: string }>(),
+);
 
-export class AddJokes implements Action {
-  readonly type: typeof ADD_JOKES = ADD_JOKES;
-  constructor(public payload: { jokes: Joke[] }) { }
-}
+export const updateJoke = createAction(
+  '[Jokes] Update single joke',
+  props<{ joke: Joke }>(),
+);
 
-export class UpdateJoke implements Action {
-  readonly type: typeof UPDATE_JOKE = UPDATE_JOKE;
-  constructor(public payload: { joke: Joke }) { }
-}
+export const removeJoke = createAction(
+  '[Jokes] Remove single joke',
+  props<{ jokeId: number }>(),
+);
 
-export class RemoveJoke implements Action {
-  readonly type: typeof REMOVE_JOKE = REMOVE_JOKE;
-  constructor(public payload: { jokeId: number }) { }
-}
+export const sortJokes = createAction(
+  '[Jokes] Sort jokes',
+  props<{ order: string }>(),
+);
 
-export class ApiGetJokes implements Action {
-  readonly type: typeof API_GET_JOKES = API_GET_JOKES;
-  constructor(public payload: { categories: string[], flags: string[], amount: number }) { }
-}
+export const apiGetJokes = createAction(
+  '[Jokes API] Get jokes from server',
+);
 
-export class ApiAddJoke implements Action {
-  readonly type: typeof API_ADD_JOKE = API_ADD_JOKE;
-  constructor(public payload: { joke: Joke }) { }
-}
-
-export type JokesActions = AddJoke | AddJokes | UpdateJoke | RemoveJoke | ApiGetJokes | ApiAddJoke;
+export const apiAddJoke = createAction(
+  '[Jokes API] Save joke to server',
+  props<{ joke: Joke }>(),
+);

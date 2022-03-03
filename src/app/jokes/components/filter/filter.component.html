@@ -1,0 +1,9 @@
+<div>
+  <button *ngFor="let cat of categories; let i = index;" (click)="toggleCategory(i)" [ngClass]="{ 'off': !cat.state }">
+    <span *ngIf="!cat.state">◦</span>
+    <span *ngIf="cat.state">●</span>
+    {{ cat.name }}
+  </button>
+</div>
+
+

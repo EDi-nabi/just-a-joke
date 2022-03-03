@@ -11,7 +11,6 @@ import { StorageConfig } from 'src/app/interfaces/storage-config.interface';
 })
 export class StorageService {
 
-  private readonly debug: boolean = false;
   private readonly storageConfig: StorageConfig;
 
   constructor(
@@ -22,18 +21,17 @@ export class StorageService {
   }
 
   // read
-  get<T>(dbName: string, key: string, schema?: JSONSchema): Observable<T | undefined> {
-    if (this.debug) console.log('# STORAGE get:', dbName, key);
-    return this.storage.get<T>(this.getPrefixedKey(dbName, key), schema || { type: 'string' });
+  get<T>(dbName: string, key: string, schema: JSONSchema): Observable<T | undefined> {
+    return this.storage.get<T>(this.getPrefixedKey(dbName, key), schema);
   }
 
-  getMultiple<T>(dbName: string, keys: string[], schema?: JSONSchema): Observable<T | undefined> {
+  getMultiple<T>(dbName: string, keys: string[], schema: JSONSchema): Observable<T | undefined> {
     return from(keys.map(key => ({ dbName, key, schema}))).pipe(
       mergeMap(item => this.get<T>(item.dbName, item.key, item.schema))
     );
   }
 
-  getAll<T>(dbName: string, schema?: JSONSchema): Observable<T | undefined> {
+  getAll<T>(dbName: string, schema: JSONSchema): Observable<T | undefined> {
     return this.keys(dbName).pipe(
       mergeMap(key => this.get<T>(dbName, key, schema))
     );
@@ -49,12 +47,10 @@ export class StorageService {
 
   // write
   set(dbName: string, key: string, value: any, schema?: JSONSchema): Observable<undefined> {
-    if (this.debug) console.log('# STORAGE set:', dbName, key, value);
     return this.storage.set(this.getPrefixedKey(dbName, key), value, schema || undefined);
   }
 
   setMultiple(dbName: string, items: { key: string, value: any, schema?: JSONSchema }[], schema?: JSONSchema): Observable<undefined> {
-    if (this.debug) console.log('# STORAGE setMultiple:', dbName, items);
     return from(items.map(item => ({
       ...item,
       // you can add schema for each item, or set a global one
@@ -66,12 +62,10 @@ export class StorageService {
   }
 
   delete(dbName: string, key: string): Observable<undefined> {
-    if (this.debug) console.log('# STORAGE delete:', dbName, key);
     return this.storage.delete(this.getPrefixedKey(dbName, key));
   }
 
   deleteMultiple(dbName: string, keys: string[]): Observable<undefined> {
-    if (this.debug) console.log('# STORAGE deleteMultiple:', dbName, keys);
     return from(keys.map(key => ({ dbName, key }))).pipe(
       mergeMap(item => this.delete(item.dbName, item.key))
     );

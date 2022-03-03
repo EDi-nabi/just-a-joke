@@ -1,1 +1,61 @@
-<p>form works!</p>
+<div>
+  <h1>They say you're funny. Tell me a joke.</h1>
+
+  <form [formGroup]="jokeForm" (ngSubmit)="onSubmit()">
+
+    <p>
+      <label for="category">Category:</label>
+      <select id="category" formControlName="category">
+        <option value="Programming">Programming</option>
+        <option value="Misc">Misc</option>
+        <option value="Dark">Dark</option>
+        <option value="Pun">Pun</option>
+        <option value="Spooky">Spooky</option>
+        <option value="Christmas">Christmas</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="type">Type:</label>
+      <select id="type" formControlName="type">
+        <option value="single">Single</option>
+        <option value="twopart">Two part</option>
+      </select>
+    </p>
+
+    <p *ngIf="jokeForm.get('type')?.value === 'single'">
+      <label for="joke">Joke:</label>
+      <textarea id="joke" type="text" formControlName="joke" rows="5"></textarea>
+    </p>
+    <p class="error" *ngIf="jokeForm.errors?.['jokeRequired'] && (jokeForm.touched || jokeForm.dirty)">You forgot to tell the joke.</p>
+    <p class="error" *ngIf="jokeForm.errors?.['jokeToShort'] && (jokeForm.touched || jokeForm.dirty)">Are you joking? Less than 20 characters? No.</p>
+
+    <p *ngIf="jokeForm.get('type')?.value === 'twopart'">
+      <label for="setup">Setup:</label>
+      <textarea id="setup" type="text" formControlName="setup" rows="5"></textarea>
+    </p>
+
+    <p *ngIf="jokeForm.get('type')?.value === 'twopart'">
+      <label for="delivery">Delivery:</label>
+      <textarea id="delivery" type="text" formControlName="delivery" rows="5"></textarea>
+    </p>
+    <p class="error" *ngIf="jokeForm.errors?.['twoPartsRequired'] && (jokeForm.touched || jokeForm.dirty)">You forgot to tell the joke.</p>
+    <p class="error" *ngIf="jokeForm.errors?.['twoPartsToShort'] && (jokeForm.touched || jokeForm.dirty)">Are you joking? Less than 20 characters? No.</p>
+
+    <p>
+      <label for="flags">Flags:</label>
+      <formgroup id="flags" formGroupName="flags">
+        <label for="nsfw"><input id="nsfw" type="checkbox" value="true" formControlName="nsfw"> nsfw</label>
+        <label for="religious"><input id="religious" type="checkbox" value="true" formControlName="religious"> religious</label>
+        <label for="political"><input id="political" type="checkbox" value="true" formControlName="political"> political</label>
+        <label for="racist"><input id="racist" type="checkbox" value="true" formControlName="racist"> racist</label>
+        <label for="sexist"><input id="sexist" type="checkbox" value="true" formControlName="sexist"> sexist</label>
+        <label for="explicit"><input id="explicit" type="checkbox" value="true" formControlName="explicit"> explicit</label>
+      </formgroup>
+    </p>
+    <p class="error" *ngIf="jokeForm.get('flags')?.errors?.['atLeastOneRequired'] && (jokeForm.touched || jokeForm.dirty)">Give me at least one flag.</p>
+    <button type="submit" [disabled]="!jokeForm.valid">Here you go</button>
+    <p *ngIf="response">{{ response }}</p>
+  </form>
+</div>
+

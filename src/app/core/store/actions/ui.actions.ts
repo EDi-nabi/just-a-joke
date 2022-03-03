@@ -1,16 +1,21 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-export const SET_ITEMS_PER_PAGE = '[UI] Set number of items per page';
-export const SAVE_ITEMS_PER_PAGE = '[UI Storage] Save number of items per page to local storage';
+export const setItemsPerPage = createAction(
+  '[UI] Set number of items per page',
+  props<{ itemsPerPage: number }>(),
+);
 
-export class SetItemsPerPage implements Action {
-  readonly type: typeof SET_ITEMS_PER_PAGE = SET_ITEMS_PER_PAGE;
-  constructor(public payload: { itemsPerPage: number }) { }
-}
+export const setCategories = createAction(
+  '[UI Storage] Save number of items per page to local storage',
+  props<{ categories: string[] }>(),
+);
 
-export class SaveItemsPerPage implements Action {
-  readonly type: typeof SAVE_ITEMS_PER_PAGE = SAVE_ITEMS_PER_PAGE;
-  constructor(public payload: { itemsPerPage: number }) { }
-}
+export const saveItemsPerPage = createAction(
+  '[UI] Set jokes categories',
+  props<{ itemsPerPage: number }>(),
+);
 
-export type UiActions = SetItemsPerPage | SaveItemsPerPage;
+export const setOrder = createAction(
+  '[UI] Set jokes sorting order',
+  props<{ order: string }>(),
+);
