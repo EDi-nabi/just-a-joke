@@ -35,6 +35,7 @@ export class PaginationComponent implements OnDestroy {
 
   getJokes(): void {
     this.jokesService.dispatchApiGetJokes();
+    this.jokesService.dispatchSortJokes(this.uiService.getOrder());
     window.scroll(0, 0);
   }
 

@@ -19,10 +19,6 @@ export const jokesReducer = (state = jokesInitialState, action): JokesState => {
     case JokesActions.addJokes.type:
       if (action.jokes?.length) {
         jokes = [...action.jokes];
-        jokes.sort((a, b) => (a.id > b.id) ? 1 : -1);
-        if (action.order === 'desc') {
-          jokes.reverse();
-        }
         return { ...state, jokes };
       }
       return state;

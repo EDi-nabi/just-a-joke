@@ -8,6 +8,7 @@
   margin: 1rem 0;
   padding: 3rem;
   border-left: 5px var(--highlight) solid;
+  width: 100%;
 
   .header {
     margin-right: 2rem;
@@ -32,15 +33,21 @@
   }
 
   .content {
-
+    @media (max-width: 540px) { width: -webkit-fill-available;; }
     .footer {
+      display: block;
+      @media (max-width: 540px) { width: -webkit-fill-available;; }
       color: var(--textlight);
 
       span {
+        display: block;
+        float: left;
         margin-right: 2rem;
         text-transform: capitalize;
 
         span {
+          display: block;
+          float: left;
           text-transform: capitalize;
         }
       }

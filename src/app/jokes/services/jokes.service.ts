@@ -18,7 +18,6 @@ export class JokesService {
     private store: Store<CoreState>
   ) {
     this.jokes$ = this.store.select(fromStore.getJokes);
-    this.dispatchApiGetJokes();
   }
 
   // get from state

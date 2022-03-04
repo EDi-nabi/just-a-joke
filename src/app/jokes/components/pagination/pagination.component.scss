@@ -18,8 +18,19 @@ button {
   padding: 10px 20px;
   text-align: center;
   margin: 0 0 1rem 0;
+  span {
+    @media (max-width: 768px) { display: none; }
+  }
+  &:hover {
+    background: var(--highlight);
+    color: var(--text);
+  }
 }
-button:hover {
-  background: var(--highlight);
-  color: var(--text);
+
+div {
+  padding: 0 1rem;
+  span {
+    @media (max-width: 430px) { display: block; }
+  }
 }
+

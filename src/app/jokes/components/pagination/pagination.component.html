@@ -1,5 +1,5 @@
-<button (click)="getJokes()">A random page</button>
-<div>How many jokes you need?:
+<button (click)="getJokes()">←<span> A random page</span></button>
+<div><span>How many jokes you need?: </span>
   <select [formControl]="itemsPerPage" (change)="onItemsPerPageChange()">
     <option>1</option>
     <option>2</option>
@@ -13,4 +13,4 @@
     <option>10</option>
   </select>
 </div>
-<button (click)="getJokes()">Another random page</button>
+<button (click)="getJokes()"><span>Another random page </span>→</button>

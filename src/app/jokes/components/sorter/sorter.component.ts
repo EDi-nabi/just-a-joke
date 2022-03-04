@@ -1,4 +1,3 @@
-import { JokesService } from 'src/app/jokes/services/jokes.service';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -15,14 +14,14 @@ export class SorterComponent {
 
   constructor(
     private uiService: UiService,
-    private jokesService: JokesService,
   ) {
     this.order$ = this.uiService.getOrder$();
   }
 
+
+
   setOrder(order: string): void {
     this.uiService.dispatchSetOrder(order);
-    this.jokesService.dispatchSortJokes(order);
   }
 
 }

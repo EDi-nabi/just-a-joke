@@ -8,7 +8,7 @@ export const addJoke = createAction(
 
 export const addJokes = createAction(
   '[Jokes] Add multiple jokes',
-  props<{ jokes: Joke[], order: string }>(),
+  props<{ jokes: Joke[] }>(),
 );
 
 export const updateJoke = createAction(
