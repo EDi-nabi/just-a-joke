@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'just-a-joke';
+  sideMenu: boolean = false;
 
   constructor() {}
+
+  toggleSidemenu(): void {
+    this.sideMenu = !this.sideMenu;
+  }
 }

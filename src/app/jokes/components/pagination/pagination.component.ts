@@ -1,6 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { UiService } from 'src/app/core/services/ui.service';
 import { JokesService } from 'src/app/jokes/services/jokes.service';
@@ -12,15 +14,16 @@ import { JokesService } from 'src/app/jokes/services/jokes.service';
 })
 export class PaginationComponent implements OnDestroy {
 
-  private itemsPerPage$: Observable<number>;
-  private subscriptions: Subscription[] = [];
+  itemsPerPage$: Observable<number>;
+  subscriptions: Subscription[] = [];
   itemsPerPage = new FormControl('');
 
   constructor(
     private uiService: UiService,
-    private jokesService: JokesService
-  ) {
-    this.itemsPerPage$ = this.uiService.getItemsPerPage$()
+    private jokesService: JokesService,
+    @Inject(PLATFORM_ID) private platformId,
+    ) {
+    this.itemsPerPage$ = this.uiService.getItemsPerPage$();
   }
 
   ngOnInit(): void {
@@ -36,7 +39,9 @@ export class PaginationComponent implements OnDestroy {
   getJokes(): void {
     this.jokesService.dispatchApiGetJokes();
     this.jokesService.dispatchSortJokes(this.uiService.getOrder());
-    window.scroll(0, 0);
+    if (isPlatformBrowser(this.platformId)) {
+      window.scroll(0, 0);
+    }
   }
 
   ngOnDestroy(): void {

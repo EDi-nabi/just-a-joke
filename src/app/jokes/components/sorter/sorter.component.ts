@@ -18,8 +18,6 @@ export class SorterComponent {
     this.order$ = this.uiService.getOrder$();
   }
 
-
-
   setOrder(order: string): void {
     this.uiService.dispatchSetOrder(order);
   }

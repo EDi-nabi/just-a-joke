@@ -1,12 +1,13 @@
 <header class="header">
   <a [routerLink]="'home'" class="logo"><img src="assets/icons/blink.svg" width="40px" height="40px"></a>
-  <input class="side-menu" type="checkbox" id="side-menu"/>
+  <!-- <input class="side-menu" type="checkbox" id="side-menu"/> -->
+  <button [ngClass]="{ 'side-menu': true, 'on': sideMenu }" id="side-menu" (click)="toggleSidemenu()"></button>
   <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
   <nav class="nav">
     <ul class="menu">
-      <li><a [routerLink]="'home'">Home</a></li>
-      <li><a [routerLink]="'jokes'">Jokes</a></li>
-      <li><a [routerLink]="'form'">Add joke</a></li>
+      <li><a [routerLink]="'home'" (click)="toggleSidemenu()">Home</a></li>
+      <li><a [routerLink]="'jokes'" (click)="toggleSidemenu()">Jokes</a></li>
+      <li><a [routerLink]="'form'" (click)="toggleSidemenu()">Add joke</a></li>
     </ul>
   </nav>
 </header>

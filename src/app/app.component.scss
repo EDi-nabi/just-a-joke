@@ -100,20 +100,20 @@ ul {
 
 
 /* Toggle menu icon */
-.side-menu:checked ~ nav {
+.side-menu.on ~ nav {
   max-height: 100%;
 }
 
-.side-menu:checked ~ .hamb .hamb-line {
+.side-menu.on ~ .hamb .hamb-line {
   background: transparent;
 }
 
-.side-menu:checked ~ .hamb .hamb-line::before {
+.side-menu.on ~ .hamb .hamb-line::before {
   transform: rotate(-45deg);
   top:0;
 }
 
-.side-menu:checked ~ .hamb .hamb-line::after {
+.side-menu.on ~ .hamb .hamb-line::after {
   transform: rotate(45deg);
   top:0;
 }

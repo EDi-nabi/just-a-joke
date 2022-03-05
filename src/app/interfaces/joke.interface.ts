@@ -1,7 +1,7 @@
 export interface Joke {
   error?: boolean;
   category: string;
-  type: 'single' | 'twopart';
+  type: string;
   joke?: string;
   setup?: string;
   delivery?: string;

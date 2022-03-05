@@ -20,16 +20,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'just-a-joke'`, () => {
+  it(`should have a sideMenu property that equals 'false'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('just-a-joke');
+    expect(app.sideMenu).toEqual(false);
   });
 
-  it('should render title', () => {
+  it(`after 'toggleSidemenu()', sideMenu property should equal 'true'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('just-a-joke app is running!');
+    const app = fixture.componentInstance;
+    app.toggleSidemenu();
+    // fixture.detectChanges();
+    expect(app.sideMenu).toEqual(true);
   });
 });
