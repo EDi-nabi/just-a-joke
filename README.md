@@ -15,7 +15,7 @@ Docker with server side rendering:\
 Build docker image
 `docker build -t just-a-joke .`\
 Run docker image
-`docker run --rm -it -p 4000:4000/tcp just-a-joke:latest`\
+`docker run --rm -it -p 4000:4000/tcp just-a-joke:latest`
 
 ## What is it all about
 
