@@ -19,7 +19,7 @@ import { metaReducers } from './core/store/reducers/core.reducers';
     AppComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     StorageModule.forRoot({
       IDBNoWrap: true,
