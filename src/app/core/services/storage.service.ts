@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
 import { StorageMap, JSONSchema } from '@ngx-pwa/local-storage';
 import { Observable, from, of } from 'rxjs';
 import { filter, mergeMap, count, map } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class StorageService {
   constructor(
     private storage: StorageMap,
     private configService: ConfigService,
-    @Inject(PLATFORM_ID) private platformId,
+    @Inject(PLATFORM_ID) private platformId: InjectionToken<Object>,
   ) {
     this.storageConfig = this.configService.getStorageConfig();
     this.isBrowser = isPlatformBrowser(this.platformId);

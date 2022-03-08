@@ -7,7 +7,7 @@ function isHydrateSuccess(action: Action): action is ReturnType<typeof Hydration
 }
 
 export function hydrationMetaReducer(reducer: ActionReducer<CoreState>): ActionReducer<CoreState> {
-  const metaReducer = (state, action) => {
+  const metaReducer = (state: any, action: any) => {
     if (isHydrateSuccess(action)) {
       return { ...state, core: { ...state.core, ui: { ...state.core.ui, ui: { ...state.core.ui.ui, itemsPerPage: action.itemsPerPage }}}};
     }

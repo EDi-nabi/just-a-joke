@@ -2,9 +2,10 @@ import { Joke } from 'src/app/interfaces/joke.interface';
 import { JokesState } from 'src/app/interfaces/jokes-state.interface'
 import { jokesInitialState } from '../state/jokes.state'
 import * as JokesActions from '../actions/jokes.actions';
+import { Action } from '@ngrx/store';
 
 
-export const jokesReducer = (state = jokesInitialState, action): JokesState => {
+export const jokesReducer = (state = jokesInitialState, action: any): JokesState => {
   let jokes: Joke[] = [];
   switch (action.type) {
 

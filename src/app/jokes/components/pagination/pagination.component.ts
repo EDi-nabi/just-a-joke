@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, InjectionToken, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Inject, PLATFORM_ID } from '@angular/core';
@@ -21,7 +21,7 @@ export class PaginationComponent implements OnDestroy {
   constructor(
     private uiService: UiService,
     private jokesService: JokesService,
-    @Inject(PLATFORM_ID) private platformId,
+    @Inject(PLATFORM_ID) private platformId: InjectionToken<Object>,
     ) {
     this.itemsPerPage$ = this.uiService.getItemsPerPage$();
   }

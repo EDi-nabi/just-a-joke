@@ -3,7 +3,7 @@ import { uiInitialState } from '../state/ui.state';
 import * as UiActions from '../actions/ui.actions';
 
 
-export const uiReducer = (state = uiInitialState, action): UiState => {
+export const uiReducer = (state = uiInitialState, action: any): UiState => {
   switch (action.type) {
 
     case UiActions.setItemsPerPage.type:
