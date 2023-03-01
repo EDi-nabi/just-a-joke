@@ -34,3 +34,5 @@ export const apiAddJoke = createAction(
   '[Jokes API] Save joke to server',
   props<{ joke: Joke }>(),
 );
+
+export type JokesActions = typeof addJoke | typeof addJokes | typeof updateJoke | typeof removeJoke | typeof sortJokes | typeof apiGetJokes | typeof apiAddJoke;

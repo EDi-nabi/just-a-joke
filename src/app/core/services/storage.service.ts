@@ -115,7 +115,7 @@ export class StorageService {
 
   // helpers
   getPrefixedKey(dbName: string, key: string): string {
-    return (this.storageConfig.prefixes[dbName] || this.storageConfig.prefixes['main']) + key;
+    return this.storageConfig.prefixes[dbName] ? this.storageConfig.prefixes[dbName] + key : this.storageConfig.prefixes['main'] + key;
   }
 
 }
